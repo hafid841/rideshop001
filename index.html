@@ -2,111 +2,100 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RideShop — طلب منتج</title>
+  <title>RideShop 🛒</title>
   <style>
-    body {
-      font-family: Tahoma, sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+    body {font-family: Tahoma, sans-serif; margin:0; background:#f4f4f4;}
+    header {background:#0f1320; color:#fff; padding:15px; text-align:center;}
+    .container {width:90%; margin:auto; padding:20px;}
+    .product {
+      background:#fff; padding:15px; border-radius:10px; margin:10px 0;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1); display:flex; align-items:center; justify-content:space-between;
     }
-    .form-container {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      width: 100%;
-      max-width: 400px;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #333;
-    }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 10px;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 14px;
-    }
+    .product img {width:90px; height:90px; border-radius:8px; object-fit:cover;}
     button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      background: #25D366;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
+      background:#16a34a; color:#fff; border:none; padding:8px 15px;
+      border-radius:6px; cursor:pointer; font-size:14px;
     }
-    button:hover {
-      background: #1ebe57;
+    button:hover {background:#128036;}
+    #cart {background:#fff; padding:15px; margin-top:20px; border-radius:10px;}
+    #whatsapp {
+      display:block; margin-top:15px; padding:12px; background:#25D366;
+      color:#fff; text-align:center; border-radius:8px; text-decoration:none;
     }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>📦 طلب منتج</h2>
-    <form id="orderForm">
-      <label>الاسم الكامل</label>
-      <input type="text" id="name" required>
+  <header>
+    <h1>RideShop 🚴‍♂</h1>
+    <p>اختر منتجاتك وطلب عبر واتساب</p>
+  </header>
 
-      <label>رقم الهاتف</label>
-      <input type="text" id="phone" required>
+  <div class="container">
+    <!-- المنتجات -->
+    <div class="product">
+      <img src="https://i.postimg.cc/D0Kh1zZD/stem.jpg" alt="Stem Shikra">
+      <div>
+        <h3>Stem Shikra</h3>
+        <p>120 DH</p>
+      </div>
+      <button onclick="addToCart('Stem Shikra', 120)">إضافة</button>
+    </div>
 
-      <label>اختر المنتج</label>
-      <select id="product" required>
-        <option value="Stem SHIKRA - 120DH">Stem SHIKRA - 120DH</option>
-        <option value="Potence HASSNS - 250DH">Potence HASSNS - 250DH</option>
-        <option value="BB Shimano SM-BB52 - 120DH">BB Shimano SM-BB52 - 120DH</option>
-        <option value="Rotor SRAM 160mm - 99DH">Rotor SRAM 160mm - 99DH</option>
-        <option value="Mono Plato MOTSUV - 150DH">Mono Plato MOTSUV - 150DH</option>
-        <option value="Pédales MEROCA - 170DH">Pédales MEROCA - 170DH</option>
-        <option value="غلاف سيليكون - 35DH">غلاف سيليكون - 35DH</option>
-        <option value="قفازات FOX - 140DH">قفازات FOX - 140DH</option>
-        <option value="Moyo Pro 7 - 500DH">Moyo Pro 7 - 500DH</option>
-        <option value="Hub HASSNS Boost - 250DH">Hub HASSNS Boost - 250DH</option>
-      </select>
+    <div class="product">
+      <img src="https://i.postimg.cc/vHh6rqVy/hassns.jpg" alt="Potence Hassns">
+      <div>
+        <h3>Potence Hassns</h3>
+        <p>250 DH</p>
+      </div>
+      <button onclick="addToCart('Potence Hassns', 250)">إضافة</button>
+    </div>
 
-      <label>الكمية</label>
-      <input type="number" id="quantity" min="1" value="1" required>
+    <div class="product">
+      <img src="https://i.postimg.cc/nr6Z4ddX/bb52.jpg" alt="Shimano BB52">
+      <div>
+        <h3>Shimano BB52</h3>
+        <p>120 DH</p>
+      </div>
+      <button onclick="addToCart('Shimano BB52', 120)">إضافة</button>
+    </div>
 
-      <label>ملاحظات إضافية</label>
-      <textarea id="note" rows="3"></textarea>
-
-      <button type="submit">إرسال الطلب عبر واتساب</button>
-    </form>
+    <!-- السلة -->
+    <div id="cart">
+      <h2>🛒 السلة</h2>
+      <ul id="cart-items"></ul>
+      <p><strong>المجموع: <span id="total">0</span> DH</strong></p>
+      <a id="whatsapp" href="#" target="_blank">إرسال الطلب عبر واتساب</a>
+    </div>
   </div>
 
   <script>
-    document.getElementById("orderForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+    let cart = [];
+    let total = 0;
 
-      let name = document.getElementById("name").value;
-      let phone = document.getElementById("phone").value;
-      let product = document.getElementById("product").value;
-      let quantity = document.getElementById("quantity").value;
-      let note = document.getElementById("note").value;
+    function addToCart(product, price) {
+      cart.push({product, price});
+      total += price;
+      updateCart();
+    }
 
-      let message = 👤 الاسم: ${name}%0A📞 الهاتف: ${phone}%0A🛒 المنتج: ${product}%0A🔢 الكمية: ${quantity}%0A✍ ملاحظات: ${note};
+    function updateCart() {
+      let list = document.getElementById("cart-items");
+      list.innerHTML = "";
+      cart.forEach(item => {
+        let li = document.createElement("li");
+        li.textContent = ${item.product} - ${item.price} DH;
+        list.appendChild(li);
+      });
+      document.getElementById("total").textContent = total;
 
-      let whatsappNumber = "212619439567";
-
-      window.open(https://wa.me/${whatsappNumber}?text=${message}, "_blank");
-    });
+      let message = "مرحبا، أريد أن أطلب:\n";
+      cart.forEach(item => {
+        message += - ${item.product}: ${item.price} DH\n;
+      });
+      message += \nالمجموع: ${total} DH;
+      document.getElementById("whatsapp").href =
+        "https://wa.me/212727449465?text=" + encodeURIComponent(message);
+    }
   </script>
 </body>
 </html>
