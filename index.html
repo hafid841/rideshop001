@@ -3,89 +3,110 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>متجر RideShop 🚴‍♂</title>
+  <title>RideShop — طلب منتج</title>
   <style>
     body {
-      font-family: Tahoma, Arial, sans-serif;
+      font-family: Tahoma, sans-serif;
       background: #f5f5f5;
       margin: 0;
       padding: 0;
-      direction: rtl;
-      text-align: center;
-    }
-    header {
-      background: #4f6af2;
-      color: #fff;
-      padding: 20px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .products {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      margin: 20px;
-      gap: 20px;
+      align-items: center;
+      min-height: 100vh;
     }
-    .card {
+    .form-container {
       background: #fff;
+      padding: 20px;
       border-radius: 10px;
-      padding: 15px;
-      width: 220px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
     }
-    .card img {
-      max-width: 100%;
-      border-radius: 8px;
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
     }
-    .card h3 {
-      margin: 10px 0 5px;
-      font-size: 18px;
-    }
-    .price {
-      color: #16a34a;
+    label {
       font-weight: bold;
-      margin: 5px 0 10px;
+      display: block;
+      margin-top: 10px;
     }
-    .btn {
-      display: inline-block;
-      background: #4f6af2;
-      color: #fff;
-      padding: 10px 15px;
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #25D366;
+      color: white;
+      border: none;
       border-radius: 6px;
-      text-decoration: none;
+      font-size: 16px;
+      cursor: pointer;
     }
-    .btn:hover {
-      background: #364ed1;
+    button:hover {
+      background: #1ebe57;
     }
   </style>
 </head>
 <body>
+  <div class="form-container">
+    <h2>📦 طلب منتج</h2>
+    <form id="orderForm">
+      <label>الاسم الكامل</label>
+      <input type="text" id="name" required>
 
-  <header>🚴‍♂ مرحبا بكم في RideShop</header>
+      <label>رقم الهاتف</label>
+      <input type="text" id="phone" required>
 
-  <div class="products">
-    <div class="card">
-      <img src="https://via.placeholder.com/200x150" alt="منتج 1">
-      <h3>بدالات MTB</h3>
-      <div class="price">75 درهم</div>
-      <a href="#" class="btn">اشتري الآن</a>
-    </div>
+      <label>اختر المنتج</label>
+      <select id="product" required>
+        <option value="Stem SHIKRA - 120DH">Stem SHIKRA - 120DH</option>
+        <option value="Potence HASSNS - 250DH">Potence HASSNS - 250DH</option>
+        <option value="BB Shimano SM-BB52 - 120DH">BB Shimano SM-BB52 - 120DH</option>
+        <option value="Rotor SRAM 160mm - 99DH">Rotor SRAM 160mm - 99DH</option>
+        <option value="Mono Plato MOTSUV - 150DH">Mono Plato MOTSUV - 150DH</option>
+        <option value="Pédales MEROCA - 170DH">Pédales MEROCA - 170DH</option>
+        <option value="غلاف سيليكون - 35DH">غلاف سيليكون - 35DH</option>
+        <option value="قفازات FOX - 140DH">قفازات FOX - 140DH</option>
+        <option value="Moyo Pro 7 - 500DH">Moyo Pro 7 - 500DH</option>
+        <option value="Hub HASSNS Boost - 250DH">Hub HASSNS Boost - 250DH</option>
+      </select>
 
-    <div class="card">
-      <img src="https://via.placeholder.com/200x150" alt="منتج 2">
-      <h3>مقود ألومنيوم</h3>
-      <div class="price">120 درهم</div>
-      <a href="#" class="btn">اشتري الآن</a>
-    </div>
+      <label>الكمية</label>
+      <input type="number" id="quantity" min="1" value="1" required>
 
-    <div class="card">
-      <img src="https://via.placeholder.com/200x150" alt="منتج 3">
-      <h3>خوذة MTB</h3>
-      <div class="price">199 درهم</div>
-      <a href="#" class="btn">اشتري الآن</a>
-    </div>
+      <label>ملاحظات إضافية</label>
+      <textarea id="note" rows="3"></textarea>
+
+      <button type="submit">إرسال الطلب عبر واتساب</button>
+    </form>
   </div>
 
+  <script>
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let name = document.getElementById("name").value;
+      let phone = document.getElementById("phone").value;
+      let product = document.getElementById("product").value;
+      let quantity = document.getElementById("quantity").value;
+      let note = document.getElementById("note").value;
+
+      let message = 👤 الاسم: ${name}%0A📞 الهاتف: ${phone}%0A🛒 المنتج: ${product}%0A🔢 الكمية: ${quantity}%0A✍ ملاحظات: ${note};
+
+      let whatsappNumber = "212619439567";
+
+      window.open(https://wa.me/${whatsappNumber}?text=${message}, "_blank");
+    });
+  </script>
 </body>
 </html>
